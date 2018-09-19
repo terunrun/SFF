@@ -1,0 +1,52 @@
+<% provide(:title, " | プロフィール") %>
+<div class="contents-wrapper">
+  <div class="container">
+    <div class="row">
+      <h2 class="text-center">プロフィール</h2>
+      <div class="col-md-offset-1 col-md-3">
+        <h3>顧客情報</h3>
+        <div class="profile-area">
+          <div class="field">
+            名前：<%= @user.name %>
+          </div>
+          <div class="field">
+            メールアドレス：<%= @user.email %>
+          </div>
+          <% if @user == current_user %>
+            <%= link_to "プロフィール変更", edit_user_registration_path %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <div class="row">
+          <h3>登録<%= t('view.product') %></h3>
+          <% if !@products.blank? %>
+            <%= render @products %>
+          <% elsif %>
+            <p>登録商品がありません</P>
+          <% end %>
+        </div>
+        <hr>
+        <% if @user.id == current_user.id %>
+          <div class="row">
+            <h3><%= t('view.favorite') %></h3>
+            <% if !@favorites.blank? %>
+              <%= render @favorites %>
+            <% elsif %>
+              <p>お気に入りが登録されていません</P>
+            <% end %>
+          </div>
+          <hr>
+          <div class="row">
+            <h3>注文履歴</h3>
+            <% if !@orders.blank? %>
+              <%= render @orders %>
+            <% elsif %>
+              <p>注文がありません</P>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
