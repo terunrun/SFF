@@ -244,6 +244,8 @@ ja:
         id: 商品番号
         name: 商品名
         category: カテゴリ
+        price: 価格
+        stock: 個数
         description: 商品説明
         image: 商品画像
         created_at: 登録成日時

@@ -5,11 +5,7 @@
       <h2 class="text-center"><%= t("view.product") %>購入</h2>
       <div class="col-md-offset-4 col-md-4">
         <%= form_for @order do |f| %>
-          <% if !f.object.errors.blank? %>
-            <% f.object.errors.full_messages.each do |message| %>
-              <%= message %>
-            <% end %>
-          <% end %>
+          <%= render 'shared/error_messages', object: f.object %>
 
           <%= hidden_field_tag :user_id, current_user.id %>
           <%= hidden_field_tag :product_id, @product.id %>

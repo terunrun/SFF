@@ -9,57 +9,27 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- Swiperを使用-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/css/swiper.min.css" />
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-default navbar-fixed-top navbar-transparent">
-        <div class="container">
-          <%= link_to root_path do %>
-            SFF Online Shop
-          <% end %>
-          <% if user_signed_in? %>
-            <p><%= t('view.welcome', name: current_user.name) %><p>
-            <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to '商品一覧', products_path %></li>
-              <li><%= link_to '商品登録', new_product_path %></li>
-              <li><%= link_to 'ユーザー一覧', users_path %></li>
-              <li><%= link_to 'プロフィール', user_path(current_user.id) %></li>
-              <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-          <% else %>
-            <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to '新規登録', new_user_registration_path %></li>
-              <li><%= link_to 'ログイン', new_user_session_path %></li>
-            </ul>
-          <% end %>
-        </div>
-        <% if !notice.blank? %>
-          <p id="flash" class="notice"><%= notice %></p>
-        <% elsif !alert.blank? %>
-          <p id="flash" class="alert"><%= alert %></p>
-        <% end %>
-      </nav>
+      <%= render "layouts/header" %>
     </header>
 
     <%= yield %>
 
     <footer>
-      <div class="container">
-        <ul>
-          <li><%= link_to '会社概要' %></li>
-          <li><a href="mailto:terunrun@gmail.com" target="_blank">コンタクト</a></li>
-          <li><a href="#top">一番上へ戻る</a></li>
-        </ul>
-        <p>&copy; SFF</p>
-      </div>
+      <%= render "layouts/footer" %>
     </footer>
 
     <!-- Swiperを使用-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/js/swiper.min.js"></script>
     <script>
       $(function(){
-        $("#flash").fadeOut(5000);
+        $("#flash").fadeOut(3000);
       });
 
       window.addEventListener('DOMContentLoaded', function() {

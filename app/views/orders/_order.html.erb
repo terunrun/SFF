@@ -1,4 +1,4 @@
-<div class="product-area">
+<div class="product-area-short">
   <p>商品名：<%= link_to "#{order.product.name}", product_path(order.product_id) %></p>
   <p>販売者：<%= link_to "#{order.product.user.name}", user_path(order.product.user.id) %></p>
   <p>注文日：<%= l(order.created_at, format: :long) %></p>

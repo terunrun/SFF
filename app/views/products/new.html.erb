@@ -5,11 +5,7 @@
       <h2 class="text-center"><%= t("view.product") %>登録</h2>
       <div class="col-md-offset-4 col-md-4">
         <%= form_for @product do |f| %>
-          <% if !f.object.errors.blank? %>
-            <% f.object.errors.full_messages.each do |message| %>
-              <%= message %>
-            <% end %>
-          <% end %>
+          <%= render 'shared/error_messages', object: f.object %>
 
           <%= hidden_field_tag :user_id, current_user.id %>
 
@@ -43,7 +39,7 @@
           <%= f.file_field :image %>
           </div>
 
-          <%= f.submit "登録", class: "form-control" %>
+          <%= f.submit "登録", class: "form-control btn-primary btn-block" %>
 
         <% end %>
       </div>
