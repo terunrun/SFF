@@ -1,15 +1,16 @@
 <div class="contents-wrapper">
   <div class="container">
     <div class="row">
-      <div class="col-md-offset-4 col-md-5">
+      <div class="col-md-offset-4 col-md-4">
         <h2><%= t('.title', resource: resource_name.to_s.humanize) %></h2>
 
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-          <%= devise_error_messages! %>
+          <!-- <%= devise_error_messages! %> -->
+          <%= render 'shared/error_messages', object: f.object %>
 
           <div class="field">
             <%= f.label :email %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
           </div>
 
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -17,27 +18,26 @@
           <% end %>
 
           <div class="field">
-            <%= f.label :password %> <i>(<%= t('.leave_blank_if_you_don_t_want_to_change_it') %>)</i><br />
-            <%= f.password_field :password, autocomplete: "off" %>
+            <%= f.label :password %> <i>(<%= t('.leave_blank_if_you_don_t_want_to_change_it') %>)</i>
             <% if @minimum_password_length %>
-              <br />
               <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
             <% end %>
+            <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
           </div>
 
           <div class="field">
             <%= f.label :password_confirmation %><br />
-            <%= f.password_field :password_confirmation, autocomplete: "off" %>
+            <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
           </div>
 
           <div class="field">
             <%= f.label :current_password %><br />
              <i>(<%= t('.we_need_your_current_password_to_confirm_your_changes') %>)</i><br />
-            <%= f.password_field :current_password, autocomplete: "off" %>
+            <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
           </div>
 
           <div class="actions">
-            <%= f.submit t('.update') %>
+            <%= f.submit t('.update'), class: "form-control btn-primary btn-block" %>
           </div>
         <% end %>
 
