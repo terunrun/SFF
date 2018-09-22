@@ -14,7 +14,7 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password: Honami_1027 
+  password: Honami_1027
   socket: /var/run/mysqld/mysqld.sock
 
 development:
@@ -50,5 +50,7 @@ test:
 production:
   <<: *default
   database: sff_production
-  username: sff
-  password: <%= ENV['SFF_DATABASE_PASSWORD'] %>
+  # username: sff
+  username: root
+  # password: <%= ENV['SFF_DATABASE_PASSWORD'] %>
+  password:

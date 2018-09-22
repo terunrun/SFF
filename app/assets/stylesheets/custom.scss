@@ -157,6 +157,7 @@
 /* 顧客情報用 */
 .profile-area {
   margin-right: 20px;
+  margin-bottom: 50px;
 }
 
 /* 商品一覧用 */
@@ -165,6 +166,11 @@
 }
 
 /* 商品詳細用 */
+.commnet-area {
+  margin-right: 20px;
+  margin-bottom: 50px;
+}
+
 .unfavorited {
   width: 50px;
   height: 50px;
@@ -192,7 +198,8 @@
 }
 
 .paginate-area {
-    text-align: right;
+  text-align: right;
+  margin-right: 20px;
 }
 
 

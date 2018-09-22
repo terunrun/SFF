@@ -17,6 +17,11 @@
     </div>
     <hr/>
     <% if !@products.blank? %>
+      <div class="row">
+        <div class="paginate-area">
+          <%= paginate @products %>
+        </div>
+      </div>
       <div class="row center-block">
         <% @products.each do |product| %>
           <div class="product-area">

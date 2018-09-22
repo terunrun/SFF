@@ -12,8 +12,11 @@
           <div class="field">
             メールアドレス：<%= @user.email %>
           </div>
-          <% if @user == current_user %>
+          <% if current_user?(@user) %>
             <%= link_to "プロフィール変更", edit_user_registration_path %>
+            <% if current_user.admin? %>
+              <p><a href="https://pay.jp/login" target="_blank">決済情報画面へ</a></p>
+            <% end %>
           <% end %>
         </div>
       </div>
@@ -28,7 +31,7 @@
             <% end %>
           </div>
           <hr>
-          <% if @user.id == current_user.id %>
+          <% if current_user?(@user) %>
             <div class="row">
               <h3><%= t('view.favorite') %></h3>
               <% if !@favorites.blank? %>

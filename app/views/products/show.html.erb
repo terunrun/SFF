@@ -18,7 +18,7 @@
           <% else %>
             <p><%= image_tag "no_image.jpg", width:"200px", height:"200px", style:" border: 1px solid lightgray"%></p>
           <% end %>
-          <% if @product.user_id == current_user.id %>
+          <% if current_user?(@product.user) %>
             <p><%= link_to "商品情報変更", edit_product_path %></p>
             <p><%= link_to "商品削除", product_path, method: :delete %></p>
           <% else %>
@@ -39,6 +39,7 @@
         </div>
       </div>
       <div class="col-md-4">
+        <div class="commnet-area">
         <h3><%= t('view.comment') %>一覧</h3>
         <% if !@comments.blank? %>
           <%= render @comments %>
@@ -55,6 +56,7 @@
           </div>
           <%= f.submit "コメント投稿", class: "form-control btn-primary btn-block" %>
         <% end %>
+      </div>
       </div>
       <div class="col-md-3">
         <h3><%= t('view.recommend') %></h3>
