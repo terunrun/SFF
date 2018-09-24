@@ -128,6 +128,18 @@ class ProductsController < ApplicationController
     redirect_to products_path, notice: "商品を削除しました"
   end
 
+  def sort
+    case params[:sort_condition]
+    when "1" then
+      @products = Product.all.order(name: "ASC").page(params[:page]).per(PER)
+    when "2" then
+      @products = Product.all.order(user_id: "ASC").page(params[:page]).per(PER)
+    when "3" then
+      @products = Product.all.order(price: "ASC").page(params[:page]).per(PER)
+    end
+    render :index
+  end
+
   private
 
     def product_params

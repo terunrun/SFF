@@ -1,3 +1,10 @@
 <div class="comment-field">
-  <%= comment.user.name %>：<%= comment.comment %>
+  <% @comments.each do |comment| %>
+    <div>
+      <%= comment.user.name %>：<%= comment.comment %>
+      <% if current_user?(comment.user) %>
+        <%= link_to "削除", comment_path(comment.id), remote: true, method: :delete %>
+      <% end %>
+    </div>
+  <% end %>
 </div>

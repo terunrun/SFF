@@ -41,17 +41,18 @@
       <div class="col-md-4">
         <div class="commnet-area">
         <h3><%= t('view.comment') %>一覧</h3>
-        <% if !@comments.blank? %>
-          <%= render @comments %>
-        <% elsif %>
-          <p>コメントがありません</P>
-        <% end %>
-        <h3><%= t('view.comment') %>登録</h3>
-        <%= form_for @comment do |f| %>
+        <div id="comment">
+          <% if !@comments.blank? %>
+            <%= render "comments/comment" %>
+          <% elsif %>
+            <p>コメントがありません</P>
+          <% end %>
+        </div>
+        <%= form_for @comment, remote: true do |f| %>
           <%= hidden_field_tag :product_id, @product.id %>
           <%= hidden_field_tag :user_id, current_user.id %>
-          <div class="form-group">
-            <%= f.label :comment %>
+          <div class="form-group" id>
+            <%= f.label :コメントする %>
             <%= f.text_area :comment, class: "form-control" %>
           </div>
           <%= f.submit "コメント投稿", class: "form-control btn-primary btn-block" %>
