@@ -1,0 +1,40 @@
+<% provide(:title, " | ショッピングカート") %>
+<div class="contents-wrapper">
+  <div class="container">
+    <h2 class="text-center">ショッピングカート</h2>
+    <% if !@cart_items.blank? %>
+      <div class="row">
+        <p class="text-center">以下の商品がカートに追加されています</h2>
+      <!-- <div class="col-md-offset-4 col-md-4"> -->
+        <% @cart_items.each do |cart_item| %>
+          <div class="cart-item-area">
+            <p>商品名：<%= cart_item.product.name %></p>
+            <p>価格：<%= cart_item.product.price %></p>
+            <p>残数：<%= cart_item.product.stock %></p>
+            <p>個数：<%= cart_item.quantity %></p>
+            <%= form_tag(update_item_path, method: :post) do %>
+              <%= hidden_field_tag :cart_item_id, cart_item.id %>
+              <%= number_field_tag :quantity, min: "1" %>
+              <%= submit_tag "再計算", class: "btn btn-primary" , :name => nil %>
+            <% end %>
+            <% if cart_item.product.image? %>
+              <p><%= image_tag cart_item.product.image.url %></p>
+            <% else %>
+              <p><%= image_tag "no_image.jpg", width:"200px", height:"200px", style:" border: 1px solid lightgray"%></p>
+            <% end %>
+            <p><%= link_to "カートから削除", delete_item_path(cart_item_id: cart_item.id), method: :delete %></p>
+          </div>
+        <% end %>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-md-offset-4 text-center">
+          <%= link_to "購入画面へ", new_order_path(cart_id: @cart.id), class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% else %>
+      <div class="row">
+        <p class="text-center">以下の商品がカートに追加されています</h2>
+      </div>
+    <% end %>
+  </div>
+</div>
