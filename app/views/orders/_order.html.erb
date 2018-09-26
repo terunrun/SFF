@@ -1,16 +1,18 @@
 <div class="row">
+<div class="order-area">
   <p>注文日：<%= l(order.created_at, format: :long) %></p>
   <% order.carts.each do |cart| %>
-  <% cart.cart_items.each do |item| %>
-  <div class="product-area-short">
-    <p>商品名：<%= link_to "#{item.product.name}", product_path(item.product_id) %></p>
-    <p>販売者：<%= link_to "#{item.product.user.name}", user_path(item.product.user.id) %></p>
-    <% if item.product.image? %>
-      <%= image_tag item.product.image.url %>
-    <% else %>
-      <%= image_tag "no_image.jpg", width:"200px", height:"200px", style:" border: 1px solid lightgray"%>
+    <% cart.cart_items.each do |item| %>
+      <div class="product-area-short">
+        <p>商品名：<%= link_to "#{item.product.name}", product_path(item.product_id) %></p>
+        <p>販売者：<%= link_to "#{item.product.user.name}", user_path(item.product.user.id) %></p>
+        <% if item.product.images? %>
+          <%= image_tag item.product.images[0].url %>
+        <% else %>
+          <%= image_tag "no_image.jpg", width:"200px", height:"200px", style:" border: 1px solid lightgray"%>
+        <% end %>
+      </div>
     <% end %>
-  </div>
   <% end %>
-  <% end %>
+</div>
 </div>

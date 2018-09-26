@@ -8,7 +8,7 @@
     <!-- fontawesomeを使用 -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %> -->
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -26,6 +26,7 @@
       <%= render "layouts/footer" %>
     </footer>
 
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <!-- Swiperを使用-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/js/swiper.min.js"></script>
     <script>

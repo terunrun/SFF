@@ -45,8 +45,8 @@
             <% else %>
               <p style="color:red">現在販売されていません。</p>
             <% end %>
-            <% if product.image? %>
-              <p><%= image_tag product.image.url %></p>
+            <% if product.images? %>
+              <p><%= image_tag product.images[0].url %></p>
             <% else %>
               <p><%= image_tag "no_image.jpg", width:"200px", height:"200px", style:" border: 1px solid lightgray"%></p>
             <% end %>
@@ -66,7 +66,9 @@
       </div>
     <% else %>
       <div class="row">
-        <p class="text-center">商品がありません</p>
+        <div class="empty-product">
+          <p class="text-center">商品がありません</p>
+        </div>
       </div>
     <% end %>
   </div>

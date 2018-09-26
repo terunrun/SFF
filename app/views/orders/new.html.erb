@@ -8,8 +8,8 @@
           <p>商品名：<%= cart_item.product.name %></p>
           <p>価格：<%= cart_item.product.price %></p>
           <p>個数：<%= cart_item.quantity %></p>
-          <% if cart_item.product.image? %>
-            <%= image_tag cart_item.product.image.url %>
+          <% if cart_item.product.images? %>
+            <%= image_tag cart_item.product.images[0].url %>
           <% else %>
             <%= image_tag "no_image.jpg", width:"200px", height:"200px", style:" border: 1px solid lightgray"%>
           <% end %>

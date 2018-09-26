@@ -9,5 +9,5 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorite_products, through: :favorites, source: 'product'
-  has_one :cart
+  has_many :carts, dependent: :destroy
 end
