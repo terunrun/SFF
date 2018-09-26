@@ -1,29 +1,29 @@
 <% provide(:title, " | 商品購入") %>
 <div class="contents-wrapper">
   <div class="container">
+    <h2 class="text-center"><%= t("view.product") %>購入</h2>
     <div class="row">
-      <h2 class="text-center"><%= t("view.product") %>購入</h2>
-      <div class="col-md-offset-4 col-md-4">
-        <%= form_for @order do |f| %>
-          <%= render 'shared/error_messages', object: f.object %>
-
-          <%= hidden_field_tag :user_id, current_user.id %>
-          <%= hidden_field_tag :product_id, @product.id %>
-
-          <div class="form-group">
-            <p>商品名：<%= @product.name %></p>
-            <p>商品説明：<%= @product.description %></p>
-            <p>価格：<%= @product.price %></p>
-            <% if @product.image? %>
-              <%= image_tag @product.image.url %>
-            <% else %>
-              <%= image_tag "no_image.jpg", width:"200px", height:"200px", style:" border: 1px solid lightgray"%>
-            <% end %>
-          </div>
-
+      <% @cart_items.each do |cart_item| %>
+        <div class="product-area-short">
+          <p>商品名：<%= cart_item.product.name %></p>
+          <p>価格：<%= cart_item.product.price %></p>
+          <p>個数：<%= cart_item.quantity %></p>
+          <% if cart_item.product.image? %>
+            <%= image_tag cart_item.product.image.url %>
+          <% else %>
+            <%= image_tag "no_image.jpg", width:"200px", height:"200px", style:" border: 1px solid lightgray"%>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <hr/>
+    <div class="row">
+      <p class="text-center">合計金額：<%= @order.total_price %></p>
+      <%= form_for @order do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
           <!-- <div class="form-group">
-            <%= f.submit "購入", class: "form-control btn", id: "payment" %>
-          </div> -->
+          <%= f.submit "購入", class: "form-control btn", id: "payment" %>
+        </div> -->
           <div style="text-align:center">
             <script type="text/javascript"
               src="https://checkout.pay.jp"

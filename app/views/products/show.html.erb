@@ -24,11 +24,14 @@
           <% else %>
             <% if @product.stock > 0 %>
               <!-- <p><%= link_to "商品購入", new_order_path(product_id: @product.id) %></p> -->
-              <%= form_tag(add_item_path, method: :post) do %>
-                <%= hidden_field_tag :product_id, @product.id %>
-                <p>個数：<%= number_field_tag :quantity, min: "1", max: @product.stock %></p>
-                <%= submit_tag "カートに入れる", class: "center-block btn btn-primary" , :name => nil %>
-              <% end %>
+              <div class="form-group">
+                <%= form_tag(add_item_path, method: :post) do %>
+                  <%= hidden_field_tag :product_id, @product.id %>
+                  <!-- nilを入れることでvalueを空にする -->
+                  <%= number_field_tag :quantity, nil, value: 1, min: 1, max: @product.stock %>
+                  <%= submit_tag "カートに入れる", class: "btn btn-primary" , :name => nil %>
+                <% end %>
+              </div>
             <% end %>
             <% if !@product.favorite_users.include?(current_user) %>
             <!-- product_idという名前のparamにproductのidをセットしてアクションへ渡す -->

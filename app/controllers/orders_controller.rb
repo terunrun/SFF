@@ -3,24 +3,31 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @product = Product.find(params[:product_id])
+    current_cart
+    @cart_items = @cart.cart_items
+    @cart_items.each do |cart_item|
+      @order.total_price += cart_item.product.price * cart_item.quantity
+    end
   end
 
   def create
-    @order = Order.new
-    @order.product_id = params[:product_id]
-    @order.user_id = params[:user_id]
-    @product = Product.find(params[:product_id])
-    if @order.save
+    current_cart
+    @cart_items = @cart.cart_items
+    @order = Order.new(user_id: current_user.id)
+    @cart_items.each do |cart_item|
+      @order.total_price += cart_item.product.price * cart_item.quantity
+    end
+    if @order.save && @cart.update_attribute(:order_id, @order.id)
       Payjp.api_key = "sk_test_c2addc6ea3e0046d801e3aef"
-          charge = Payjp::Charge.create(
-          :amount => @product.price,
+        charge = Payjp::Charge.create(
+          :amount => @order.total_price,
           :card => params["payjp-token"],
           :currency => "jpy",
         )
-      @product.decrement_stock
       UserMailer.ordering(current_user).deliver_now
-      UserMailer.ordered(Product.find(params[:product_id]).user).deliver_now
+      @cart_items.each do |cart_item|
+        UserMailer.ordered(cart_item.product.user).deliver_now
+      end
       redirect_to products_path, notice: 'ご注文ありがとうございました。'
     else
       render :new, danger: '商品の注文に失敗しました。'

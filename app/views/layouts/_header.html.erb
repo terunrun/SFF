@@ -15,24 +15,22 @@
       <p class="text-center"><%= t('view.welcome', name: current_user.name) %><p>
     <% end %>
   </div>
-    <div id="gnavi" class="collapse navbar-collapse">
-      <% if user_signed_in? %>
-        <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to '商品一覧', products_path %></li>
-          <li><%= link_to '商品登録', new_product_path %></li>
-          <li><%= link_to 'ユーザー一覧', users_path %></li>
-          <li><%= link_to 'プロフィール', user_path(current_user.id) %></li>
-          <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-        </ul>
-      <% else %>
-        <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to '新規登録', new_user_registration_path %></li>
-          <li><%= link_to 'ログイン', new_user_session_path %></li>
-        </ul>
-      <% end %>
-
+  <div id="gnavi" class="collapse navbar-collapse">
+    <% if user_signed_in? %>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to '商品一覧', products_path %></li>
+        <li><%= link_to '商品登録', new_product_path %></li>
+        <li><%= link_to 'カート', cart_path(current_user.id) %></li>
+        <li><%= link_to 'プロフィール', user_path(current_user.id) %></li>
+        <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+      </ul>
+    <% else %>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to '新規登録', new_user_registration_path %></li>
+        <li><%= link_to 'ログイン', new_user_session_path %></li>
+      </ul>
+    <% end %>
   </div>
-
   <% if !notice.blank? %>
     <p id="flash" class="notice text-center"><%= notice %></p>
   <% elsif !alert.blank? %>
