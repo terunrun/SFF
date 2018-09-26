@@ -5,8 +5,8 @@
   <div class="field">
     販売者：<%= link_to "#{product.user.name}", user_path(product.user.id) %>
   </div>
-  <% if product.image? %>
-    <%= image_tag product.image.url %>
+  <% if product.images? %>
+    <%= image_tag product.images[0].url %>
   <% else %>
     <%= image_tag "no_image.jpg", width:"200px", height:"200px", style:" border: 1px solid lightgray"%>
   <% end %>

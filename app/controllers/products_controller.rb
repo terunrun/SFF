@@ -143,7 +143,8 @@ class ProductsController < ApplicationController
   private
 
     def product_params
-      params.require(:product).permit(:name, :image, :description, :category_id, :stock, :price)
+      # 複数画像を受け取るように対応 :image⇒{image: []}
+      params.require(:product).permit(:name, {images: []}, :description, :category_id, :stock, :price)
     end
 
     # def products_csv

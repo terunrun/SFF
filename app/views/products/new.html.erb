@@ -35,8 +35,12 @@
           </div>
 
           <div class="form-group">
-          <%= f.label :image %>
-          <%= f.file_field :image %>
+          <%= f.label :images %>
+          <!-- <%= f.file_field :image %> -->
+          <%= f.file_field :images, multiple: true %>
+          <p>*この写真がメイン写真になります</P>
+          <%= f.file_field :images, multiple: true %>
+          <%= f.file_field :images, multiple: true %>
           </div>
 
           <%= f.submit "登録", class: "form-control btn-primary btn-block" %>

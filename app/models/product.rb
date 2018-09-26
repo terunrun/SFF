@@ -1,12 +1,12 @@
 class Product < ApplicationRecord
   belongs_to :user
   belongs_to :category
-  has_many :orders, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorite_users, through: :favorites, source: "user"
   has_many :cart_items, dependent: :destroy
-  mount_uploader :image, PictureUploader
+  # 複数画像のアップロードに対応する mount_uploader⇒mount_uploaders
+  mount_uploaders :images, PictureUploader
 
   validates :name, presence: true
   validates :user_id, presence: true

@@ -18,13 +18,6 @@ class Users::SessionsController < Devise::SessionsController
   #   super
   # end
   def destroy
-    # ログアウトした場合に注文未済カートが残らないようにする
-    if !session[:cart_id].blank?
-      cart = Cart.find(session[:cart_id])
-      if !cart.blank? && cart.order_id.blank?
-        cart.destroy
-      end
-    end
     super
   end
 
