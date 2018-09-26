@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @products = @user.products.all.order(name: "ASC").page(params[:page]).per(PER)
     @favorites = @user.favorite_products
-    @orders = @user.orders.all
+    @orders = @user.orders
   end
 
 end

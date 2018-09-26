@@ -14,6 +14,7 @@ class CartsController < ApplicationController
     @cart_item.quantity += params[:quantity].to_i
     if @cart_item.save
       if product.update_stock(product.stock - params[:quantity].to_i)
+        flash.now[:notice] = "カートに商品を追加しました"
         redirect_to cart_path(@cart.id), notice: "カートに商品を追加しました"
       end
     end
