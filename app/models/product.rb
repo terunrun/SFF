@@ -5,6 +5,7 @@ class Product < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorite_users, through: :favorites, source: "user"
+  has_many :cart_items, dependent: :destroy
   mount_uploader :image, PictureUploader
 
   validates :name, presence: true
@@ -13,8 +14,7 @@ class Product < ApplicationRecord
   validates :stock, presence: true, numericality: { only_integer: true }
   validates :price, presence: true, numericality: { only_integer: true }
 
-  def decrement_stock
-    stock = self.stock - 1
+  def update_stock(stock)
     update_attribute(:stock, stock)
   end
 

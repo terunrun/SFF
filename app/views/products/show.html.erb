@@ -23,7 +23,12 @@
             <p><%= link_to "商品削除", product_path, method: :delete %></p>
           <% else %>
             <% if @product.stock > 0 %>
-              <p><%= link_to "商品購入", new_order_path(product_id: @product.id) %></p>
+              <!-- <p><%= link_to "商品購入", new_order_path(product_id: @product.id) %></p> -->
+              <%= form_tag(add_item_path, method: :post) do %>
+                <%= hidden_field_tag :product_id, @product.id %>
+                <p>個数：<%= number_field_tag :quantity, min: "1", max: @product.stock %></p>
+                <%= submit_tag "カートに入れる", class: "center-block btn btn-primary" , :name => nil %>
+              <% end %>
             <% end %>
             <% if !@product.favorite_users.include?(current_user) %>
             <!-- product_idという名前のparamにproductのidをセットしてアクションへ渡す -->
