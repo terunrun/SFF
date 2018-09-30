@@ -23,6 +23,18 @@
     margin-bottom: 0;
     margin-left:20px;
     line-height: 50px;
+
+    @media screen and (max-width: 480px){
+      font-size: 12px;
+    }
+
+    @media screen and (min-width: 481px) and (max-width: 767px){
+      font-size: 14px;
+    }
+
+    @media screen and (min-width: 768px) {
+      font-size: 16px;
+    }
   }
 
   li:last-child {
@@ -158,6 +170,19 @@
   margin: 10px;
   width: 200px;
   height: 300px;
+}
+
+.modal-dialog {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
+  margin: auto;
+  pointer-events: all;
+  //
+  // .modal-content {
+  //   pointer-events: all;
+  // }
 }
 
 .paginate-area {

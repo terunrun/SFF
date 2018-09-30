@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   # 商品並べ替え用
   get "products_sort", to: "products#sort", as: "products/sort"
 
+  get "image_detail", to: "products#image_detail"
+
   devise_for :users, controllers: {
     confirmations: 'users/confirmations',
     passwords: 'users/passwords',

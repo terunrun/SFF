@@ -140,6 +140,15 @@ class ProductsController < ApplicationController
     render :index
   end
 
+  def image_detail
+    @product = Product.find(params[:product_id])
+    @image = @product.images[params[:index].to_i]
+    respond_to do |format|
+      format.js
+    end
+  end
+
+
   private
 
     def product_params

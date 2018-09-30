@@ -19,7 +19,10 @@
             <p id="main-image"><%= image_tag @product.images[0].url %></p>
             <div class="field">
               <% @product.images.each_with_index do |image, n| %>
-                <%= image_tag image.url, style: "width:50px;height:50px;" , id: "sub-image-#{n}"%>
+                  <%= image_tag image.url, style: "width:50px;height:50px;" , id: "sub-image-#{n}"%>
+                <%= link_to image_detail_path(index: n, product_id: @product.id), remote: true do %>
+                  <%= image_tag image.url, style: "width:50px;height:50px;" , id: "sub-image-#{n}"%>
+                <% end %>
               <% end %>
             </div>
           <% else %>
@@ -55,20 +58,20 @@
       </div>
       <div class="col-md-4">
         <div class="commnet-area">
-        <h3><%= t('view.comment') %>一覧</h3>
-        <div id="comment">
-          <%= render "comments/comment" %>
-        </div>
-        <%= form_for @comment, remote: true do |f| %>
-          <%= hidden_field_tag :product_id, @product.id %>
-          <%= hidden_field_tag :user_id, current_user.id %>
-          <div class="form-group" id>
-            <%= f.label :コメントする %>
-            <%= f.text_area :comment, class: "form-control" %>
+          <h3><%= t('view.comment') %>一覧</h3>
+          <div id="comment">
+            <%= render "comments/comment" %>
           </div>
-          <%= f.submit "コメント投稿", class: "form-control btn-primary btn-block" %>
-        <% end %>
-      </div>
+          <%= form_for @comment, remote: true do |f| %>
+            <%= hidden_field_tag :product_id, @product.id %>
+            <%= hidden_field_tag :user_id, current_user.id %>
+            <div class="form-group" id>
+              <%= f.label :コメントする %>
+              <%= f.text_area :comment, class: "form-control" %>
+            </div>
+            <%= f.submit "コメント投稿", class: "form-control btn-primary btn-block" %>
+          <% end %>
+        </div>
       </div>
       <div class="col-md-3">
         <h3><%= t('view.recommend') %></h3>
@@ -78,10 +81,11 @@
           <p>おすすめがありません</P>
         <% end %>
       </div>
+      <div id="image_detail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
     </div>
   </div>
 </div>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   var main_image  = document.getElementById("main-image");
   var product_images_length = document.getElementById("product_images_length");
   for (var i = 0; i < product_images_length.value; i++) {
@@ -96,4 +100,4 @@
   sub_image_2.addEventListener("click", function() {
     main_image.innerHTML = "<%= escape_javascript(image_tag @product.images[2].url) if !@product.images[2].blank? %>";
   });
-</script>
+</script> -->
