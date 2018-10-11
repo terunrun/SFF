@@ -115,10 +115,14 @@ class ProductsController < ApplicationController
 
   def update
     @product = Product.find(params[:id])
-    if @product.update_attributes(product_params)
-      redirect_to product_path, notice: "商品情報を変更しました"
+    if @product.user == current_user
+      if @product.update_attributes(product_params)
+        redirect_to product_path, notice: "商品情報を変更しました"
+      else
+        render "new", danger: "商品情報の変更に失敗しました"
+      end
     else
-      render "new", danger: "商品情報の変更に失敗しました"
+      redirect_to products_path
     end
   end
 

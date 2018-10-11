@@ -18,5 +18,14 @@ module Sff
 
     # 言語を日本語化
     config.i18n.default_locale = :ja
+
+    # generate時に作成不要なファイルを指定
+    config.generators do |g|
+      g.test_framework :rspec,
+      view_specs: false,
+      helper_specs: false,
+      routing_specs: false
+    end
+
   end
 end

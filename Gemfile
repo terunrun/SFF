@@ -46,6 +46,15 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-stack_explorer'
 
+  # Rspecを追加
+  gem 'rspec-rails'
+
+  # factory_botを追加
+  gem 'factory_bot_rails'
+
+  # rspecをコマンドとして使用する
+  gem 'spring-commands-rspec'
+
 end
 
 group :production do
@@ -60,9 +69,8 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 
-  # Rspecを追加
-  gem 'rspec-rails'
-
+  # binstubを使用する
+  gem 'spring-commands-rspec'
 end
 
 group :test do
