@@ -8,7 +8,8 @@ class Product < ApplicationRecord
   # 複数画像のアップロードに対応する mount_uploader⇒mount_uploaders
   mount_uploaders :images, PictureUploader
 
-  validates :name, presence: true
+  # uniquenessにuser_idのスコープをつける（同一userでの一意制限）
+  validates :name, presence: true, uniqueness: { scope: :user_id }
   validates :user_id, presence: true
   validates :category_id, presence: true
   validates :stock, presence: true, numericality: { only_integer: true }
@@ -17,6 +18,5 @@ class Product < ApplicationRecord
   def update_stock(stock)
     update_attribute(:stock, stock)
   end
-
 
 end
